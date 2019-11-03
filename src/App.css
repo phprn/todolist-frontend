@@ -1,0 +1,48 @@
+.header-section {
+  padding: 1.5rem;
+}
+
+.button-status {
+  align-self: center;
+  margin-right: 0.75rem;
+}
+
+.card + .card {
+  margin-top: 15px;
+}
+.card-header-title .tag {
+  margin-right: 0.5rem;
+}
+.card.is-completed {
+  opacity: 0.5;
+}
+
+.toggle-collapse-completed {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-collapse-completed:before {
+  content: " ";
+  border-top: 1px solid gray;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+}
+
+.toggle-collapse-completed span {
+  background-color: white;
+  z-index: 20;
+  padding: 0 10px;
+}
+.toggle-collapse-completed:hover:before {
+  border-top-color: #00d1b2;
+}
+
+.toggle-collapse-completed:hover span {
+  color: #00d1b2
+}
