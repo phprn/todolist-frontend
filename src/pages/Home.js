@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import camelcaseKeys from 'camelcase-keys';
 import axios from 'axios';
 import Nav from '../components/Nav';
-import TaskCard from '../components/TaskCard';
+import Tasks from '../components/Tasks';
 
 const Home = () => {
   const [tasks, setTasks] = useState([])
@@ -15,14 +15,11 @@ const Home = () => {
     request()
   }, []);
 
-
   return (
     <>
       <Nav />
       <div className="container">
-        {tasks.map(task => (
-          <TaskCard key={task.id} {...task} />
-        ))}
+        <Tasks tasks={tasks} />
       </div>
     </>
   );
