@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
-import TaskCard from './components/TaskCard';
 import Add from './pages/Add';
 import Edit from './pages/Edit';
+import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 
 import './App.css';
@@ -20,7 +20,7 @@ function App() {
           <Edit />
         </Route>
         <Route path="/" exact>
-          <TaskCard />
+          <Home />
         </Route>
         <Route path="*">
           <NoMatch />
