@@ -2,7 +2,7 @@ import React from 'react';
 import TaskCard from './TaskCard';
 import NoData from './NoData';
 
-const Tasks = ({ tasks }) => {
+const TaskList = ({ tasks }) => {
   if (!tasks.length) {
     return <NoData />;
   }
@@ -10,4 +10,4 @@ const Tasks = ({ tasks }) => {
   return tasks.map(task => <TaskCard key={task.id} {...task} />);
 };
 
-export default Tasks;
+export default TaskList;

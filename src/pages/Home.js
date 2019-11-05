@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import camelcaseKeys from 'camelcase-keys';
-import axios from 'axios';
+import Tasks from '../services/Tasks';
 import Nav from '../components/Nav';
-import Tasks from '../components/Tasks';
+import TaskList from '../components/TaskList';
 
 const Home = () => {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const request = async () => {
-      const { data } = await axios.get('http://localhost:3000/api/v1/tasks');
-      setTasks(camelcaseKeys(data.data));
-    }
-    request()
+      setTasks(await Tasks.list());
+    };
+    request();
   }, []);
 
   return (
     <>
       <Nav />
       <div className="container">
-        <Tasks tasks={tasks} />
+        <TaskList tasks={tasks} />
       </div>
     </>
   );
