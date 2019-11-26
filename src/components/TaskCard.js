@@ -24,7 +24,7 @@ const TaskCard = ({
         className="button button-status"
         onClick={onToggleComplete(id, isCompleted)}
       >
-        <span className="icon" e={isCompleted}>
+        <span className="icon">
           <FontAwesomeIcon icon={isCompleted ? faCheckSquare : faSquare} />
         </span>
       </button>
