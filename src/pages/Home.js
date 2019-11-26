@@ -5,6 +5,8 @@ import TaskAPI from '../services/Tasks';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -18,8 +20,10 @@ const Home = () => {
   const onDelete = ({ id, title }) => async () => {
     if (window.confirm(`Do you really want to delete the ${id}# ${title}`)) {
       try {
+        setIsDeleting(true);
         await TaskAPI.destroy(id);
         setTasks(tasks.filter(item => item.id !== id));
+        setIsDeleting(false);
       } catch (error) {
         console.error(error);
       }
@@ -27,8 +31,8 @@ const Home = () => {
   };
 
   const onToggleComplete = (id, isCompleted) => async () => {
-    console.log({ isCompleted });
     try {
+      setIsEditing(true);
       await TaskAPI.edit(id, { isCompleted: !isCompleted });
       setTasks(
         tasks.map(item =>
@@ -40,6 +44,7 @@ const Home = () => {
             : item,
         ),
       );
+      setIsEditing(false);
     } catch (error) {
       console.error(error);
     }
@@ -54,6 +59,8 @@ const Home = () => {
             tasks={tasks}
             onDelete={onDelete}
             isLoading={isLoading}
+            isEditing={isEditing}
+            isDeleting={isDeleting}
             onToggleComplete={onToggleComplete}
           />
         </div>

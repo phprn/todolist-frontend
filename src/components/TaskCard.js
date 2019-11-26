@@ -11,6 +11,8 @@ const TaskCard = ({
   createdAt,
   onDelete,
   onToggleComplete,
+  isEditing,
+  isDeleting,
 }) => (
   <div className="card">
     <header className="card-header">
@@ -22,10 +24,14 @@ const TaskCard = ({
       <button
         type="button"
         className="button button-status"
+        disabled={isEditing}
         onClick={onToggleComplete(id, isCompleted)}
       >
         <span className="icon">
-          <FontAwesomeIcon icon={isCompleted ? faCheckSquare : faSquare} />
+          <FontAwesomeIcon
+            icon={isEditing ? 'spinner' : isCompleted ? faCheckSquare : faSquare}
+            spin={isEditing}
+          />
         </span>
       </button>
     </header>
@@ -43,9 +49,19 @@ const TaskCard = ({
         <button
           type="button"
           className="button is-danger is-outlined"
+          disabled={isDeleting}
           onClick={onDelete({ id, title })}
         >
-          Delete
+          {isDeleting ? (
+            <>
+              <span className="icon">
+                <FontAwesomeIcon icon="spinner" spin />
+              </span>
+              <span>Deleting</span>
+            </>
+          ) : (
+            'Delete'
+          )}
         </button>
       </div>
       <div className="card-footer-item">

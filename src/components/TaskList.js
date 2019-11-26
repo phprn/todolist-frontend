@@ -2,7 +2,7 @@ import React from 'react';
 import TaskCard from './TaskCard';
 import NoData from './NoData';
 
-const TaskList = ({ tasks, onDelete, onToggleComplete, isLoading }) => {
+const TaskList = ({ tasks, onDelete, onToggleComplete, isLoading, isEditing, isDeleting }) => {
   if (isLoading) {
     return (
       <div className="content">
@@ -17,7 +17,14 @@ const TaskList = ({ tasks, onDelete, onToggleComplete, isLoading }) => {
   }
 
   return tasks.map(task => (
-    <TaskCard key={task.id} {...task} onDelete={onDelete} onToggleComplete={onToggleComplete} />
+    <TaskCard
+      key={task.id}
+      {...task}
+      onDelete={onDelete}
+      onToggleComplete={onToggleComplete}
+      isEditing={isEditing}
+      isDeleting={isDeleting}
+    />
   ));
 };
 

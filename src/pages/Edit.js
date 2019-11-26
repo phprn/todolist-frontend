@@ -7,6 +7,7 @@ const cleanFields = { title: '', description: '', isCompleted: false };
 
 const Edit = () => {
   const { id } = useParams();
+  const [isInitial, setIsInitial] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [form, setForm] = useState(cleanFields);
 
@@ -16,6 +17,7 @@ const Edit = () => {
 
       setForm(data);
       setIsLoading(false);
+      setIsInitial(false);
     };
     request();
   }, []);
@@ -32,6 +34,7 @@ const Edit = () => {
       onSave={onSave}
       form={form}
       setForm={setForm}
+      isInitial={isInitial}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
       isEdit

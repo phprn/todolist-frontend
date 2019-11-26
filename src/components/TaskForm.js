@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Field from './Field';
 import { Link, useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 
-const Form = ({ form, setForm, title, onSave, isEdit, isLoading }) => {
+const Form = ({ form, setForm, title, onSave, isEdit, isLoading, isInitial }) => {
   const history = useHistory();
   const [errors, setErrors] = useState({ title: '' });
 
@@ -97,9 +99,12 @@ const Form = ({ form, setForm, title, onSave, isEdit, isLoading }) => {
             <p className="control">
               <button type="submit" className="button is-success" disabled={isLoading}>
                 <span className="icon">
-                  <i className="fas fa-save"></i>
+                  <FontAwesomeIcon
+                    icon={!isInitial && isLoading ? 'spinner' : faSave}
+                    spin={!isInitial && isLoading}
+                  />
                 </span>
-                <span>Save</span>
+                <span>{!isInitial && isLoading ? 'Saving' : 'Save'}</span>
               </button>
             </p>
           </div>
@@ -111,6 +116,7 @@ const Form = ({ form, setForm, title, onSave, isEdit, isLoading }) => {
 
 Form.defaultProps = {
   isEdit: false,
+  isInitial: false,
 };
 
 export default Form;
