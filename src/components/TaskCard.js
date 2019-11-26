@@ -1,8 +1,17 @@
 import React from 'react';
-import cl from 'classnames';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 
-const TaskCard = ({ id, title, description, isCompleted, createdAt }) => (
+const TaskCard = ({
+  id,
+  title,
+  description,
+  isCompleted,
+  createdAt,
+  onDelete,
+  onToggleComplete,
+}) => (
   <div className="card">
     <header className="card-header">
       <div className="card-header-title">
@@ -10,9 +19,13 @@ const TaskCard = ({ id, title, description, isCompleted, createdAt }) => (
         {title}
       </div>
 
-      <button type="button" className="button button-status">
-        <span className="icon">
-          <i className={cl('far', { 'fa-square': !isCompleted, 'fa-check-square': isCompleted })} />
+      <button
+        type="button"
+        className="button button-status"
+        onClick={onToggleComplete(id, isCompleted)}
+      >
+        <span className="icon" e={isCompleted}>
+          <FontAwesomeIcon icon={isCompleted ? faCheckSquare : faSquare} />
         </span>
       </button>
     </header>
@@ -27,7 +40,11 @@ const TaskCard = ({ id, title, description, isCompleted, createdAt }) => (
     </div>
     <footer className="card-footer">
       <div className="card-footer-item">
-        <button type="button" className="button is-danger is-outlined">
+        <button
+          type="button"
+          className="button is-danger is-outlined"
+          onClick={onDelete({ id, title })}
+        >
           Delete
         </button>
       </div>

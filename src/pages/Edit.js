@@ -7,7 +7,7 @@ const cleanFields = { title: '', description: '', isCompleted: false };
 
 const Edit = () => {
   const { id } = useParams();
-  const [isInitialState, setIsInitialState] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [form, setForm] = useState(cleanFields);
 
   useEffect(() => {
@@ -15,13 +15,15 @@ const Edit = () => {
       const data = await Tasks.get(id);
 
       setForm(data);
-      setIsInitialState(false);
+      setIsLoading(false);
     };
     request();
   }, []);
 
   const onSave = async form => {
+    setIsLoading(true);
     await Tasks.edit(id, form);
+    setIsLoading(false);
   };
 
   return (
@@ -30,7 +32,8 @@ const Edit = () => {
       onSave={onSave}
       form={form}
       setForm={setForm}
-      isInitialState={isInitialState}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
       isEdit
     />
   );

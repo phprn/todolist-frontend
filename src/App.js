@@ -11,7 +11,6 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Header />
       <Switch>
         <Route path="/tasks/add">
           <Add />

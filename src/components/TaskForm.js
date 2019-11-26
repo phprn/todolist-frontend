@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Field from './Field';
+import { Link, useHistory } from 'react-router-dom';
 
-const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const Form = ({ form, setForm, title, onSave, isEdit, isLoading }) => {
+  const history = useHistory();
   const [errors, setErrors] = useState({ title: '' });
 
   const isFormValid = () => {
@@ -23,9 +24,8 @@ const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
     if (isLoading) return;
 
     if (isFormValid()) {
-      setIsLoading(true);
       await onSave(form);
-      setIsLoading(false);
+      history.push('/');
     }
   };
   const onChange = ({ target }) => {
@@ -39,13 +39,6 @@ const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
     <div className="container">
       <div className="section">
         <h3 className="title has-text-centered">{title}</h3>
-
-        <article className="message is-danger">
-          <div className="message-header">
-            <p>ERROR :-(</p>
-          </div>
-          <div className="message-body">Internal Server Error</div>
-        </article>
         <form onSubmit={onSubmit}>
           <Field name="title" label="Title *" helpText={errors.title} isDanger={!!errors.title}>
             <input
@@ -61,7 +54,7 @@ const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
             <textarea
               className="textarea"
               placeholder="Enter with the description"
-              value={form.description}
+              value={form.description || ''}
               onChange={onChange}
               disabled={isLoading}
             />
@@ -94,12 +87,12 @@ const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
 
           <div className="field is-grouped is-grouped-centered">
             <p className="control">
-              <button className="button is-light">
+              <Link to="/" className="button is-light">
                 <span className="icon">
                   <i className="fas fa-times"></i>
                 </span>
                 <span>Cancel</span>
-              </button>
+              </Link>
             </p>
             <p className="control">
               <button type="submit" className="button is-success" disabled={isLoading}>
@@ -118,7 +111,6 @@ const Form = ({ form, setForm, title, onSave, isEdit, isInitialState }) => {
 
 Form.defaultProps = {
   isEdit: false,
-  isInitialState: false,
 };
 
 export default Form;

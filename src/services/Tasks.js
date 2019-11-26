@@ -24,9 +24,14 @@ const editTask = async (id, body) => {
   return camelcaseKeys(data);
 };
 
+const destroyTask = id => {
+  return axios.delete(`${base}tasks/${id}`);
+};
+
 export default {
   list: listTasks,
   create: createTask,
   get: getTasks,
   edit: editTask,
+  destroy: destroyTask,
 };

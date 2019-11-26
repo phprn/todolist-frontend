@@ -2,30 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Nav = () => (
-  <div className="header-section">
+  <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="container">
-      <div className="columns">
-        <div className="column">
-          <Link to="/tasks/add" className="button">
-            <span className="icon">
-              <i className="fas fa-plus" />
-            </span>
-            <span>Add Task</span>
-          </Link>
-        </div>
-        <div className="column">
-          <div className="field">
-            <p className="control has-icons-right">
-              <input className="input" type="text" placeholder="Find a task" />
-              <span className="icon is-right">
-                <i className="fas fa-search" />
+      <div className="navbar-brand">
+        <Link to="/" className="navbar-item">
+          <h1>TODO</h1>
+        </Link>
+      </div>
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <div className="buttons">
+            <Link to="/tasks/add" className="button is-primary">
+              <span className="icon">
+                <i className="fas fa-plus" />
               </span>
-            </p>
+              <span>Add Task</span>
+            </Link>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 );
 
 export default Nav;
