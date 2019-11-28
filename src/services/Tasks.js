@@ -2,7 +2,7 @@ import camelcaseKeys from 'camelcase-keys';
 import snakecaseKeys from 'snakecase-keys';
 import axios from 'axios';
 
-const base = 'http://localhost:3000/api/v1/';
+const base = process.env.REACT_APP_API_URL;
 
 const listTasks = async () => {
   const { data } = await axios.get(`${base}tasks`);
